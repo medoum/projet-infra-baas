@@ -9,6 +9,10 @@ import {
    doc,
    deleteDoc
   } from 'firebase/firestore';
+import ReactGA from "react-ga";
+
+const TRACKING_ID = "352397519"; 
+ReactGA.initialize(TRACKING_ID);
 
 
 
@@ -35,6 +39,7 @@ function App() {
 
 
   useEffect(()=>{
+    ReactGA.pageview(window.location.pathname);
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
       setUsers(data.docs.map((doc) => ({...doc.data(), id: doc.id})))
